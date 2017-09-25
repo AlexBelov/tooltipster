@@ -1344,7 +1344,12 @@ $.Tooltipster.prototype = {
 		
 		var self = this,
 			$content = self._$tooltip.find('.tooltipster-content');
-		
+
+    // Add zooming support
+    if (self.__options.zoom) {
+      self._$tooltip.css('zoom', self.__options.zoom);
+    }
+
 		// get the initial content size
 		if (self.__options.trackTooltip) {
 			self.__contentBcr = $content[0].getBoundingClientRect();
