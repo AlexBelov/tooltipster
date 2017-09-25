@@ -16,7 +16,7 @@
     // like Node.
     module.exports = factory(require("jquery"));
   } else {
-    factory(jQuery);
+    factory(root["jQuery"]);
   }
 }(this, function ($) {
 
@@ -1366,7 +1366,12 @@ $.Tooltipster.prototype = {
 		
 		var self = this,
 			$content = self._$tooltip.find('.tooltipster-content');
-		
+
+    // Add zooming support
+    if (self.__options.zoom) {
+      self._$tooltip.css('zoom', self.__options.zoom);
+    }
+
 		// get the initial content size
 		if (self.__options.trackTooltip) {
 			self.__contentBcr = $content[0].getBoundingClientRect();
@@ -3341,6 +3346,7 @@ function transitionSupport() {
 // we'll return jQuery for plugins not to have to declare it as a dependency,
 // but it's done by a build task since it should be included only once at the
 // end when we concatenate the main file with a plugin
+
 // sideTip is Tooltipster's default plugin.
 // This file will be UMDified by a build task.
 
